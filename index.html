@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>For Lalas ❤️</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#16040d;color:#fff;display:flex;align-items:center;justify-content:center;position:relative}
+.bg{position:absolute;inset:-20%;background:radial-gradient(circle at 50% 40%,rgba(255,63,119,.34),transparent 25%),radial-gradient(circle at 15% 80%,rgba(255,135,170,.18),transparent 22%),radial-gradient(circle at 85% 20%,rgba(180,20,90,.20),transparent 25%);animation:bg 8s ease-in-out infinite alternate}
+.stars,.hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.65;animation:twinkle 2.5s infinite alternate}
+.heart{position:absolute;bottom:-10vh;font-size:clamp(20px,5vw,40px);animation:float linear infinite;opacity:0}
+.wrap{width:min(92vw,650px);text-align:center;position:relative;z-index:2;padding:20px}
+.tiny{letter-spacing:5px;text-transform:uppercase;font-size:11px;opacity:.7;margin-bottom:18px}
+.heart-big{font-size:clamp(70px,20vw,130px);line-height:1;filter:drop-shadow(0 0 25px rgba(255,55,110,.8));animation:beat 1.5s infinite;display:inline-block}
+h1{margin:20px 0 10px;font-family:Georgia,serif;font-weight:500;font-size:clamp(42px,12vw,82px);line-height:1.05;background:linear-gradient(90deg,#fff,#ffd1df,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.line{width:80px;height:1px;margin:20px auto;background:linear-gradient(90deg,transparent,#ff9ab8,transparent)}
+.message{min-height:76px;font-family:Georgia,serif;font-size:clamp(19px,5vw,27px);line-height:1.5;color:#ffe8ef;padding:0 8px}.message span{animation:fade 3.8s ease both}
+.hint{font-size:12px;opacity:.5;margin-top:22px}
+button{margin-top:24px;border:1px solid rgba(255,255,255,.22);color:white;background:rgba(255,255,255,.08);border-radius:999px;padding:12px 22px;font-size:14px;backdrop-filter:blur(10px)}
+.burst{position:fixed;z-index:5;pointer-events:none;animation:burst 1.5s ease-out forwards;font-size:24px}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.13)}28%{transform:scale(1)}42%{transform:scale(1.06)}}
+@keyframes bg{from{transform:scale(1) rotate(0)}to{transform:scale(1.08) rotate(3deg)}}
+@keyframes twinkle{from{transform:scale(.5);opacity:.2}to{transform:scale(1.8);opacity:1}}
+@keyframes float{0%{transform:translateY(0) translateX(0) rotate(0);opacity:0}10%{opacity:.7}100%{transform:translateY(-120vh) translateX(50px) rotate(360deg);opacity:0}}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes burst{0%{transform:translate(0,0) scale(.4);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(1.4) rotate(25deg);opacity:0}}
+</style></head>
+<body>
+<div class="bg"></div><div class="stars" id="stars"></div><div class="hearts" id="hearts"></div>
+<main class="wrap">
+<div class="tiny">a little piece of my heart</div>
+<div class="heart-big" id="heart">❤️</div>
+<h1>I love you, Lalas</h1><div class="line"></div>
+<div class="message" id="message"><span>Out of everyone in this world, somehow my heart chose you. ❤️</span></div>
+<button id="loveBtn">Tap my heart 💗</button><div class="hint">and watch what happens...</div>
+</main>
+<script>
+const messages=[
+"I love you, Lalas. More than these little words could ever explain. ❤️",
+"If I could give you one thing, I would give you the ability to see yourself through my eyes. Then you'd know how special you are to me. 💕",
+"Every time I think about you, my heart gets a little happier. ✨",
+"You're not just someone I love — you're my favorite thought, my favorite smile, and my favorite person. 💗",
+"No matter how many times I say it, it will never be enough: I LOVE YOU, LALAS. ❤️",
+"If love had a name, I'd call it Lalas. 🌙❤️"];
+let i=0;const message=document.getElementById("message");
+function changeMessage(){i=(i+1)%messages.length;message.innerHTML="<span>"+messages[i]+"</span>"}
+setInterval(changeMessage,5000);
+function makeStars(){const s=document.getElementById("stars");for(let i=0;i<55;i++){const e=document.createElement("i");e.className="star";e.style.left=Math.random()*100+"%";e.style.top=Math.random()*100+"%";e.style.animationDelay=Math.random()*3+"s";s.appendChild(e)}}
+function makeHearts(){const h=document.getElementById("hearts"),symbols=["❤️","💕","💗","💖","✨"];for(let i=0;i<18;i++){const e=document.createElement("span");e.className="heart";e.textContent=symbols[Math.floor(Math.random()*symbols.length)];e.style.left=Math.random()*100+"%";e.style.animationDuration=6+Math.random()*7+"s";e.style.animationDelay=-Math.random()*12+"s";h.appendChild(e)}}
+function burst(){const r=document.getElementById("heart").getBoundingClientRect();for(let n=0;n<18;n++){const e=document.createElement("div");e.className="burst";e.textContent=["❤️","💕","💗","✨"][n%4];e.style.left=r.left+r.width/2+"px";e.style.top=r.top+r.height/2+"px";const a=Math.random()*Math.PI*2,d=90+Math.random()*190;e.style.setProperty("--x",Math.cos(a)*d+"px");e.style.setProperty("--y",Math.sin(a)*d+"px");document.body.appendChild(e);setTimeout(()=>e.remove(),1500)}changeMessage()}
+document.getElementById("loveBtn").onclick=burst;document.getElementById("heart").onclick=burst;makeStars();makeHearts();
+</script></body></html>
